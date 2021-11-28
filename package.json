@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "start": "node ./src/index.js",
+    "start:dev": "webpack --config webpack.dev.js",
+    "start:prod": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -22,9 +25,13 @@
   "devDependencies": {
     "@babel/preset-env": "^7.16.4",
     "babel-jest": "^27.3.1",
+    "babel-loader": "^8.2.3",
+    "dotenv-webpack": "^7.0.3",
+    "html-webpack-plugin": "^5.5.0",
     "jest": "^27.3.1",
     "nodemon": "^2.0.15",
-    "webpack": "^5.64.4"
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
   },
   "dependencies": {
     "dotenv": "^10.0.0"
