@@ -1,0 +1,29 @@
+{
+  "name": "simple-crud-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Strronciy/simple-crud-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Strronciy/simple-crud-api/issues"
+  },
+  "homepage": "https://github.com/Strronciy/simple-crud-api#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.4",
+    "babel-jest": "^27.3.1",
+    "jest": "^27.3.1",
+    "nodemon": "^2.0.15",
+    "webpack": "^5.64.4"
+  }
+}
