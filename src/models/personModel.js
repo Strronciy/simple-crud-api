@@ -6,6 +6,14 @@ const findAll = () => {
     });
 };
 
+const findById = (id) => {
+    return new Promise((resolve, reject) => {
+        const person = persons.find((p) => p.id === id);
+        resolve(person);
+    });
+};
+
 module.exports = {
     findAll,
+    findById,
 };
