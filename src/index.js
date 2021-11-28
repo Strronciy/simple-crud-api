@@ -1,6 +1,10 @@
 const http = require("http");
 require("dotenv").config();
-const { getPersons, getPerson } = require("./controllers/personController");
+const {
+    getPersons,
+    getPerson,
+    createPerson,
+} = require("./controllers/personController");
 
 const PORT = process.env.PORT || 5000;
 
@@ -12,6 +16,9 @@ server.on("request", (req, res) => {
     } else if (req.url.match(/\/person\/([0-9]+)/) && req.method === "GET") {
         const id = req.url.split("/")[2];
         getPerson(req, res, id);
+    } else if (req.url === "/person" && req.method === "POST") {
+        console.log("POST person");
+        createPerson(req, res);
     } else {
         res.writeHead(404, { "Content-Type": "application/json" });
         res.end(

@@ -2,12 +2,12 @@
   "name": "simple-crud-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/index.js",
   "type": "commonjs",
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "start": "node ./src/index.js",
+    "start": "nodemon ./src/index.js",
     "start:dev": "webpack --config webpack.dev.js",
     "start:prod": "webpack --config webpack.prod.js"
   },
@@ -34,6 +34,7 @@
     "webpack-cli": "^4.9.1"
   },
   "dependencies": {
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "uuid": "^8.3.2"
   }
 }

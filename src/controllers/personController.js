@@ -1,5 +1,7 @@
 const Person = require("../models/personModel");
 
+const { getPostData } = require("../utils");
+
 const getPersons = async (req, res) => {
     try {
         const persons = await Person.findAll();
@@ -25,7 +27,29 @@ const getPerson = async (req, res, id) => {
     }
 };
 
+const createPerson = async (req, res) => {
+    try {
+        const body = await getPostData(req);
+        console.log(body);
+        const { name, age, hobbies } = JSON.parse(body);
+
+        const person = {
+            name,
+            age,
+            hobbies,
+        };
+
+        const newPerson = await Person.create(person);
+        res.writeHead(201, { "Content-Type": "application/json" });
+
+        return res.end(JSON.stringify(newPerson));
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 module.exports = {
     getPersons,
     getPerson,
+    createPerson,
 };
