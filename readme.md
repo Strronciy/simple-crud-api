@@ -1,7 +1,9 @@
 # Simple CRUD API
 
-Your task is to implement simple CRUD API using in-memory database underneath.  
-NB! You must create new repository for this task. Its name must be `simple-crud-api` i.e. full link to the repository must be `https://github.com/%your-gihub-id%/simple-crud-api`.
+## Install:
+
+Put host into .env file in format `PORT=host`
+For example ```PORT=4000```
 
 ## Details:
 
