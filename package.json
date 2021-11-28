@@ -7,9 +7,9 @@
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "start": "nodemon ./src/index.js",
-    "start:dev": "webpack --config webpack.dev.js",
-    "start:prod": "webpack --config webpack.prod.js"
+    "start": "node ./src/index.js",
+    "start:dev": "nodemon ./src/index.js",
+    "start:prod": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
