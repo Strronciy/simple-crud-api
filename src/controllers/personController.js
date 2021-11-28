@@ -13,6 +13,14 @@ const getPersons = async (req, res) => {
 };
 
 const getPerson = async (req, res, id) => {
+    if (
+        !id.match(
+            "/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i"
+        )
+    ) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: "ID is invalid!" }));
+    }
     try {
         const person = await Person.findById(id);
         if (person) {
@@ -45,6 +53,7 @@ const createPerson = async (req, res) => {
                 })
             );
         }
+
         const person = {
             name,
             age,
@@ -61,6 +70,14 @@ const createPerson = async (req, res) => {
 };
 
 const updatePerson = async (req, res, id) => {
+    if (
+        !id.match(
+            "/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i"
+        )
+    ) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: "ID is invalid!" }));
+    }
     try {
         const person = await Person.findById(id);
 
@@ -89,6 +106,14 @@ const updatePerson = async (req, res, id) => {
 };
 
 const deletePerson = async (req, res, id) => {
+    if (
+        !id.match(
+            "/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i"
+        )
+    ) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: "ID is invalid!" }));
+    }
     try {
         const person = await Person.findById(id);
         if (person) {
@@ -96,7 +121,7 @@ const deletePerson = async (req, res, id) => {
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: `Person ${id} removed.` }));
         } else {
-            res.writeHead(404, { "Content-Type": "application/json" });
+            res.writeHead(204, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Person Not Found" }));
         }
     } catch (error) {
