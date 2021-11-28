@@ -19,8 +19,18 @@ const create = (person) => {
     return new Promise((resolve, reject) => {
         const newPerson = { id: uuidv4(), ...person };
         persons.push(newPerson);
-        writeDataToFile("./src/data/persons.js", persons);
+        writeDataToFile("./src/data/persons.json", persons);
         resolve(newPerson);
+    });
+};
+
+const update = (id, person) => {
+    return new Promise((resolve, reject) => {
+        const index = persons.findIndex((p) => p.id === id);
+        persons[index] = { id, ...person };
+
+        writeDataToFile("./src/data/persons.json", persons);
+        resolve(persons[index]);
     });
 };
 
@@ -28,4 +38,5 @@ module.exports = {
     findAll,
     findById,
     create,
+    update,
 };

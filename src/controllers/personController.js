@@ -48,8 +48,37 @@ const createPerson = async (req, res) => {
     }
 };
 
+const updatePerson = async (req, res, id) => {
+    try {
+        const person = await Person.findById(id);
+
+        if (person) {
+            const body = await getPostData(req);
+            console.log(body);
+            const { name, age, hobbies } = JSON.parse(body);
+
+            const personData = {
+                name: name || person.name,
+                age: age || person.age,
+                hobbies: hobbies || person.hobbies,
+            };
+
+            const updPerson = await Person.update(id, personData);
+            res.writeHead(200, { "Content-Type": "application/json" });
+
+            return res.end(JSON.stringify(updPerson));
+        } else {
+            res.writeHead(404, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ message: "Person Not Found" }));
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 module.exports = {
     getPersons,
     getPerson,
     createPerson,
+    updatePerson,
 };
