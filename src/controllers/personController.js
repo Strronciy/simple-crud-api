@@ -30,9 +30,21 @@ const getPerson = async (req, res, id) => {
 const createPerson = async (req, res) => {
     try {
         const body = await getPostData(req);
-        console.log(body);
         const { name, age, hobbies } = JSON.parse(body);
-
+        if (!name) {
+            res.writeHead(400, { "Content-Type": "application/json" });
+            return res.end(JSON.stringify({ message: "Name is required!" }));
+        } else if (!age) {
+            res.writeHead(400, { "Content-Type": "application/json" });
+            return res.end(JSON.stringify({ message: "Age is required!" }));
+        } else if (!hobbies) {
+            res.writeHead(400, { "Content-Type": "application/json" });
+            return res.end(
+                JSON.stringify({
+                    message: 'Hobbies is required! (Could be "hobbies": [])',
+                })
+            );
+        }
         const person = {
             name,
             age,
