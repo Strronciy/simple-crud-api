@@ -10,7 +10,6 @@ const writeDataToFile = (filepath, content) => {
 };
 
 const getPostData = (req) => {
-    console.log("req from getPostData", req);
     return new Promise((resolve, reject) => {
         try {
             let body = "";
@@ -20,7 +19,6 @@ const getPostData = (req) => {
             req.on("end", () => {
                 resolve(body);
             });
-            console.log(body);
         } catch (error) {
             reject(error);
         }
