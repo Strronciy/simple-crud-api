@@ -17,7 +17,7 @@ server.on("request", (req, res) => {
         getPersons(req, res);
     } else if (
         req.url.match(
-            /\/person\/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
+            /\/person\/([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})/i
         ) &&
         req.method === "GET"
     ) {
@@ -27,7 +27,7 @@ server.on("request", (req, res) => {
         createPerson(req, res);
     } else if (
         req.url.match(
-            /\/person\/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
+            /\/person\/([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})/i
         ) &&
         req.method === "PUT"
     ) {
@@ -35,7 +35,7 @@ server.on("request", (req, res) => {
         updatePerson(req, res, id);
     } else if (
         req.url.match(
-            /\/person\/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
+            /\/person\/([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})/i
         ) &&
         req.method === "DELETE"
     ) {
