@@ -5,6 +5,7 @@ const {
     getPerson,
     createPerson,
     updatePerson,
+    deletePerson,
 } = require("./controllers/personController");
 
 const PORT = process.env.PORT || 5000;
@@ -23,6 +24,9 @@ server.on("request", (req, res) => {
     } else if (req.url.match(/\/person\/([0-9]+)/) && req.method === "PUT") {
         const id = req.url.split("/")[2];
         updatePerson(req, res, id);
+    } else if (req.url.match(/\/person\/([0-9]+)/) && req.method === "DELETE") {
+        const id = req.url.split("/")[2];
+        deletePerson(req, res, id);
     } else {
         res.writeHead(404, { "Content-Type": "application/json" });
         res.end(
