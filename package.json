@@ -9,7 +9,7 @@
     "test:coverage": "jest --coverage",
     "start": "node ./src/index.js",
     "start:dev": "nodemon ./src/index.js",
-    "start:prod": "webpack --config webpack.config.js"
+    "start:prod": "webpack --config webpack.config.js && node ./dist/bundle.js"
   },
   "repository": {
     "type": "git",
