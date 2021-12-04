@@ -1,10 +1,7 @@
 const Person = require("../models/personModel");
 
 const { getPostData } = require("../utils");
-
-const v4 = new RegExp(
-    /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
-);
+const { validate } = require("uuid");
 
 const getPersons = async (_, res) => {
     try {
@@ -18,7 +15,7 @@ const getPersons = async (_, res) => {
 };
 
 const getPerson = async (_, res, id) => {
-    if (!id.match(v4)) {
+    if (!validate(id)) {
         res.writeHead(400, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: "ID is invalid!" }));
     }
@@ -73,7 +70,7 @@ const createPerson = async (req, res) => {
 };
 
 const updatePerson = async (req, res, id) => {
-    if (!id.match(v4)) {
+    if (!validate(id)) {
         res.writeHead(400, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: "ID is invalid!" }));
     }
@@ -105,7 +102,7 @@ const updatePerson = async (req, res, id) => {
 };
 
 const deletePerson = async (_, res, id) => {
-    if (!id.match(v4)) {
+    if (!validate(id)) {
         res.writeHead(400, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: "ID is invalid!" }));
     }
