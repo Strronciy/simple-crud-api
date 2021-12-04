@@ -12,36 +12,21 @@ const {
 const runServer = () => {
     const PORT = process.env.PORT || 5000;
 
+    const personUrlReqExp = /\/person\/.+/;
+
     const server = http.createServer();
 
     server.on("request", (req, res) => {
+        const id = req.url.split("/")[2];
         if (req.url === "/person" && req.method === "GET") {
             getPersons(req, res);
-        } else if (
-            req.url.match(
-                /\/person\/([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})/i
-            ) &&
-            req.method === "GET"
-        ) {
-            const id = req.url.split("/")[2];
+        } else if (req.url.match(personUrlReqExp) && req.method === "GET") {
             getPerson(req, res, id);
         } else if (req.url === "/person" && req.method === "POST") {
             createPerson(req, res);
-        } else if (
-            req.url.match(
-                /\/person\/([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})/i
-            ) &&
-            req.method === "PUT"
-        ) {
-            const id = req.url.split("/")[2];
+        } else if (req.url.match(personUrlReqExp) && req.method === "PUT") {
             updatePerson(req, res, id);
-        } else if (
-            req.url.match(
-                /\/person\/([0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})/i
-            ) &&
-            req.method === "DELETE"
-        ) {
-            const id = req.url.split("/")[2];
+        } else if (req.url.match(personUrlReqExp) && req.method === "DELETE") {
             deletePerson(req, res, id);
         } else {
             res.writeHead(404, { "Content-Type": "application/json" });
