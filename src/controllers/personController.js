@@ -6,7 +6,7 @@ const v4 = new RegExp(
     /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
 );
 
-const getPersons = async (req, res) => {
+const getPersons = async (_, res) => {
     try {
         const persons = await Person.findAll();
         res.writeHead(200, { "Content-Type": "application/json" });
@@ -17,7 +17,7 @@ const getPersons = async (req, res) => {
     }
 };
 
-const getPerson = async (req, res, id) => {
+const getPerson = async (_, res, id) => {
     if (!id.match(v4)) {
         res.writeHead(400, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: "ID is invalid!" }));
@@ -104,7 +104,7 @@ const updatePerson = async (req, res, id) => {
     }
 };
 
-const deletePerson = async (req, res, id) => {
+const deletePerson = async (_, res, id) => {
     if (!id.match(v4)) {
         res.writeHead(400, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: "ID is invalid!" }));
@@ -113,10 +113,10 @@ const deletePerson = async (req, res, id) => {
         const person = await Person.findById(id);
         if (person) {
             await Person.remove(id);
-            res.writeHead(200, { "Content-Type": "application/json" });
+            res.writeHead(204, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: `Person ${id} removed.` }));
         } else {
-            res.writeHead(204, { "Content-Type": "application/json" });
+            res.writeHead(404, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Person Not Found" }));
         }
     } catch (error) {
